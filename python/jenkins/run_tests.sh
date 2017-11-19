@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # your paths will be different
 proj_path=${WORKSPACE}/python
@@ -12,7 +12,9 @@ export LC_ALL=en_US.utf-8
 export LANG=en_US.utf-8
 
 # create virtual environment
-virtualenv -p python3 .venv
+if [ ! -d .venv ]; then
+    virtualenv -p python3 .venv
+fi
 
 # activate virtual environment
 source .venv/bin/activate

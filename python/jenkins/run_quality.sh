@@ -6,11 +6,6 @@ proj_path=${WORKSPACE}/python
 # change working dir
 cd ${proj_path}
 
-# click and Python 3,
-# from http://click.pocoo.org/5/python3/
-export LC_ALL=en_US.utf-8
-export LANG=en_US.utf-8
-
 # create virtual environment
 if [ ! -d .venv ]; then
     virtualenv -p python3 .venv
@@ -20,16 +15,10 @@ fi
 source .venv/bin/activate
 
 # install prerequisite
-pip install pytest pytest-cov
+pip install pylint
 
-# install project
-pip install -e .
-
-# run tests
-pytest --junit-xml=results.xml \
-       --cov-report term-missing \
-       --cov-report xml \
-       --cov=src
+# run pylint
+pylint --rcfile=.pylint.cfg --reports=n --disable=all src | tee pylint.out
 
 # deactivate virtual environment
 deactivate
