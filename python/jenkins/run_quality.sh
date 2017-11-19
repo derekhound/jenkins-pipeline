@@ -18,7 +18,7 @@ source .venv/bin/activate
 pip install pylint
 
 # run pylint
-pylint --rcfile=.pylint.cfg --reports=n --disable=all src | tee pylint.out
+pylint --rcfile=.pylint --reports=n --disable=all src | tee pylint.out
 
 # deactivate virtual environment
 deactivate
