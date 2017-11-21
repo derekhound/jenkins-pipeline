@@ -1,11 +1,5 @@
 #!/bin/bash -e
 
-# your paths will be different
-proj_path=${WORKSPACE}/python
-
-# change working dir
-cd ${proj_path}
-
 # create virtual environment
 if [ ! -d .venv ]; then
     virtualenv -p python3 .venv

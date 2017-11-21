@@ -1,11 +1,5 @@
 #!/bin/bash -e
 
-# your paths will be different
-proj_path=${WORKSPACE}/python
-
-# change working dir
-cd ${proj_path}
-
 # click and Python 3,
 # from http://click.pocoo.org/5/python3/
 export LC_ALL=en_US.utf-8
