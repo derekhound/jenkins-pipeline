@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git url: 'https://github.com/derekhound/jenkins-pipeline.git',
+                    branch: 'master'  
+            }
+        }
+
+        stage('Quality Control') {
+            steps {
+                dir('python') {
+                    sh 'bin/run_pylint.sh'
+                }
+            }
+        } 
+        
+        stage('Unit Test') {
+            steps {
+                dir('python') {
+                    sh 'bin/run_pytest_cov.sh'
+                }
+            }  
+        }
+        
+        stage('Build and Upload') {
+            steps {
+                dir('python') {
+                    echo 'This is Build and Upload'
+                }
+            }
+        }
+        
+        stage('Deploy: Alpha') {
+            steps {
+                dir('python') {
+                    echo 'This is Deploy: Alpha '
+                }
+            }
+        }
+        
+        stage('Integration Test') {
+            steps {
+                dir('python') {
+                    echo 'This is Integration Test'
+                }
+            }
+        } 
+    }
+    post {
+        success {
+            junit '**/results.xml'
+            step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
+        }
+    }    
+}
