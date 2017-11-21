@@ -1,13 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout Code') {
-            steps {
-                git url: 'https://github.com/derekhound/jenkins-pipeline.git',
-                    branch: 'master'  
-            }
-        }
-
         stage('Quality Control') {
             steps {
                 dir('python') {
